@@ -1,10 +1,8 @@
 package com.restapi.dataloader;
 
 import com.restapi.model.AppUser;
-import com.restapi.model.CarStatus;
 import com.restapi.model.MaintenanceStatus;
 import com.restapi.model.Role;
-import com.restapi.repository.CarStatusRepository;
 import com.restapi.repository.MaintenanceStatusRepository;
 import com.restapi.repository.RoleRepository;
 import com.restapi.repository.UserRepository;
@@ -29,8 +27,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private RoleRepository roleRepository;
 
     @Autowired
-    private CarStatusRepository carStatusRepository;
-    @Autowired
     private MaintenanceStatusRepository maintenanceStatusRepository;
 
     @Autowired
@@ -51,9 +47,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createUserIfNotFound("user", "user@user.com", "user", 1234567891, "Chennai", userRole);
         createUserIfNotFound("admin", "admin@admin.com", "admin", 1234567892, "Theni", adminRole);
         createUserIfNotFound("staff", "staff@staff.com", "staff", 1234567893, "Chengalpet", staffRole);
-        createCarStatusIfNotFound("Pending");
-        createCarStatusIfNotFound("Confirmed");
-        createCarStatusIfNotFound("Cancelled");
 
         createMaintenanceStatusIfNotFound("Pending");
         createMaintenanceStatusIfNotFound("Maintenance Done");
@@ -68,17 +61,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         } else {
             MaintenanceStatus newMaintenanceStatus = new MaintenanceStatus(status);
             return maintenanceStatusRepository.save(newMaintenanceStatus);
-        }
-    }
-
-    @Transactional
-    private CarStatus createCarStatusIfNotFound(String status) {
-        Optional<CarStatus> carStatusOptional = carStatusRepository.findByStatus(status);
-        if (carStatusOptional.isPresent()) {
-            return carStatusOptional.get();
-        } else {
-            CarStatus newCarStatus = new CarStatus(status);
-            return carStatusRepository.save(newCarStatus);
         }
     }
 

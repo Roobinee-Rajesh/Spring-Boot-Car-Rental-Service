@@ -15,6 +15,7 @@ public class AdminCarDto {
         carDetail.setSeats(carRequest.getSeats());
         carDetail.setRental_pricing(carRequest.getRental_pricing());
         carDetail.setPhoto(carRequest.getPhoto());
+        carDetail.setMaintenance_schedule(carRequest.getMaintenance_schedule());
         return carDetail;
     }
 
@@ -27,6 +28,7 @@ public class AdminCarDto {
         adminCarResponse.setRental_pricing(carDetail.getRental_pricing());
         adminCarResponse.setPhoto(carDetail.getPhoto());
         adminCarResponse.setMaintenance_staff_id(carDetail.getMaintenanceStaff().getId());
+        adminCarResponse.setMaintenance_schedule(carDetail.getMaintenance_schedule());
         return adminCarResponse;
     }
 

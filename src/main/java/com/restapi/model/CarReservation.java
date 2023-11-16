@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class CarReservation {
     private Integer id;
 
     @CreationTimestamp
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(updatable = false)
     private LocalDateTime reservation_date;
 
     @Column(nullable = false)
@@ -30,11 +33,6 @@ public class CarReservation {
 
     @Column(nullable = false)
     private double total_price;
-
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private CarStatus carStatus;
 
     @JsonIgnore
     @ManyToOne
