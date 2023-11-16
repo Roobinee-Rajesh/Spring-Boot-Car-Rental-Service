@@ -1,4 +1,4 @@
-package com.restapi.service;
+package com.restapi.service.user;
 
 import com.restapi.dto.CarDto;
 import com.restapi.model.CarDetail;
@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CarService {
     @Autowired
@@ -14,7 +16,11 @@ public class CarService {
 
     @Autowired
     private CarDetailRepository carDetailRepository;
-    public List<CarDetail> findAllAvailableCars() {
-        return carDetailRepository.findAllAvailableCar();
+    public List<CarDetail> findAllACars() {
+        return carDetailRepository.findAll();
+    }
+
+    public Optional<CarDetail> findCarById(Integer carId) {
+        return carDetailRepository.findById(carId);
     }
 }

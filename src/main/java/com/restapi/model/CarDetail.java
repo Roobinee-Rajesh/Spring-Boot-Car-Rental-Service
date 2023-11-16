@@ -1,5 +1,6 @@
 package com.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.util.List;
 public class CarDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, length = 200)
     private String manufacture;
@@ -35,18 +36,17 @@ public class CarDetail {
     private double rental_pricing;
 
     @Column(nullable = false)
-    private LocalDateTime maintenance_schedule;
+    private int maintenance_schedule;
 
-    @Column(nullable = false)
-    private String maintenance_staff;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "maintenance_staff_id", referencedColumnName = "id")
+    private AppUser maintenanceStaff;
 
     @Lob
     @Column(name = "photo", columnDefinition="BLOB")
     private byte[] photo;
 
-    private Boolean delete_flag = false;
-
-    private Boolean is_booked = false;
 
     @OneToMany(mappedBy = "carDetail")
     private List<CarReservation> carReservations;

@@ -48,24 +48,40 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Role adminRole = createRoleIfNotFound(Role.ADMIN);
         Role staffRole = createRoleIfNotFound(Role.STAFF);
 //        Create user
-        createUserIfNotFound("user", "user@user.com","user",1234567891,"Chennai", userRole);
-        createUserIfNotFound("admin", "admin@admin.com","admin", 1234567892,"Theni",adminRole);
-        createUserIfNotFound("staff", "staff@staff.com","staff", 1234567893,"Chengalpet",staffRole);
-        createStatus("Pending");
-        createStatus("Confirmed");
-        createStatus("Cancelled");
+        createUserIfNotFound("user", "user@user.com", "user", 1234567891, "Chennai", userRole);
+        createUserIfNotFound("admin", "admin@admin.com", "admin", 1234567892, "Theni", adminRole);
+        createUserIfNotFound("staff", "staff@staff.com", "staff", 1234567893, "Chengalpet", staffRole);
+        createCarStatusIfNotFound("Pending");
+        createCarStatusIfNotFound("Confirmed");
+        createCarStatusIfNotFound("Cancelled");
 
-        createMaintenanceStatus("Pending");
-        createMaintenanceStatus("Maintenance Done");
+        createMaintenanceStatusIfNotFound("Pending");
+        createMaintenanceStatusIfNotFound("Maintenance Done");
         alreadySetup = true;
     }
 
-    private void createStatus(String status) {
-        carStatusRepository.save(new CarStatus(status));
+    @Transactional
+    private MaintenanceStatus createMaintenanceStatusIfNotFound(String status) {
+        Optional<MaintenanceStatus> maintenanceStatusOptional = maintenanceStatusRepository.findByStatus(status);
+        if (maintenanceStatusOptional.isPresent()) {
+            return maintenanceStatusOptional.get();
+        } else {
+            MaintenanceStatus newMaintenanceStatus = new MaintenanceStatus(status);
+            return maintenanceStatusRepository.save(newMaintenanceStatus);
+        }
     }
-    private void createMaintenanceStatus(String status) {
-        maintenanceStatusRepository.save(new MaintenanceStatus(status));
+
+    @Transactional
+    private CarStatus createCarStatusIfNotFound(String status) {
+        Optional<CarStatus> carStatusOptional = carStatusRepository.findByStatus(status);
+        if (carStatusOptional.isPresent()) {
+            return carStatusOptional.get();
+        } else {
+            CarStatus newCarStatus = new CarStatus(status);
+            return carStatusRepository.save(newCarStatus);
+        }
     }
+
 
     @Transactional
     private Role createRoleIfNotFound(final String username) {
@@ -79,7 +95,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    private AppUser createUserIfNotFound(final String username, final String email,final String password,final Integer phone_number,final String address,
+    private AppUser createUserIfNotFound(final String username, final String email, final String password, final Integer phone_number, final String address,
                                          final Role role) {
         Optional<AppUser> optionalUser = userRepository.findByUsername(username);
         AppUser user = null;

@@ -1,11 +1,19 @@
-package com.restapi.request;
+package com.restapi.request.admin;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
-public class CarRequest {
+@Component
+@Getter
+@Setter
+public class AdminCarRequest {
+
+    private Integer id;
 
     @NotEmpty
     @Size(min = 3, message = "Manufacture should have at least 3 characters")
@@ -15,24 +23,21 @@ public class CarRequest {
     @Size(min = 3, message = "Manufacture should have at least 3 characters")
     private String model;
 
-    @NotEmpty
+    @NotNull
     private int year;
 
-    @NotEmpty
+    @NotNull
     private int seats;
 
-    @NotEmpty
+    @NotNull
     private double rental_pricing;
 
-    @NotEmpty
-    private LocalDateTime maintenance_schedule;
 
-    @NotEmpty
-    private String maintenance_staff;
+    @NotNull
+    private int maintenance_schedule;
 
-    @NotEmpty
     private byte[] photo;
 
-    private Boolean is_booked;
+    private Integer maintenance_staff_id;
 
 }

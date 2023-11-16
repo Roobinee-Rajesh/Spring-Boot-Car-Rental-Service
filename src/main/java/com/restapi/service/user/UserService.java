@@ -1,8 +1,6 @@
-package com.restapi.service;
+package com.restapi.service.user;
 
 import com.restapi.dto.AuthDto;
-import com.restapi.dto.AuthDto;
-import com.restapi.exception.common.AppException;
 import com.restapi.exception.common.InvalidUserException;
 import com.restapi.model.AppUser;
 import com.restapi.model.Role;
@@ -10,11 +8,13 @@ import com.restapi.repository.RoleRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.LoginRequest;
 import com.restapi.request.RegisterRequest;
+import com.restapi.request.user.UserRequest;
 import com.restapi.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -30,6 +30,7 @@ public class UserService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
         AppUser appUser = authDto.mapToAppUser(registerRequest);
+//        System.out.println(appUser.getName());
         appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
         appUser.setRoles(roleRepository.findByName(Role.USER));
         appUser = userRepository.save(appUser);
@@ -47,5 +48,26 @@ public class UserService {
 
         return authDto.mapToAuthResponse(appUser);
     }
+
+    public Optional<AppUser> findUserById(Integer userId) {
+        Optional<AppUser> appUser = userRepository.findById(userId);
+        return appUser;
+    }
+
+//    public AuthResponse updateUser(UserRequest userRequest) {
+//        AppUser appUser = authDto.mapToAppUser(userRequest);
+//        appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
+//        appUser.setRoles(roleRepository.findByName(Role.USER));
+//        appUser = userRepository.save(appUser);
+//        return authDto.mapToAuthResponse(appUser);
+//    }
+public AuthResponse updateUser(RegisterRequest registerRequest) {
+    AppUser appUser = authDto.mapToAppUser(registerRequest);
+//        System.out.println(appUser.getName());
+    appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
+    appUser.setRoles(roleRepository.findByName(Role.USER));
+    appUser = userRepository.save(appUser);
+    return authDto.mapToAuthResponse(appUser);
+}
 
 }

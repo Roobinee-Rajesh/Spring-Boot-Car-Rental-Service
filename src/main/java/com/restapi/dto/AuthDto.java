@@ -2,6 +2,7 @@ package com.restapi.dto;
 
 import com.restapi.model.AppUser;
 import com.restapi.request.RegisterRequest;
+import com.restapi.request.user.UserRequest;
 import com.restapi.response.AuthResponse;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,9 @@ public class AuthDto {
 
     public AppUser mapToAppUser(RegisterRequest user) {
         AppUser appUser = new AppUser();
+        if (user.getId() != null) {
+            appUser.setId(user.getId());
+        }
         appUser.setUsername(user.getUsername());
         appUser.setName(user.getName());
         appUser.setPassword(user.getPassword());
@@ -25,6 +29,21 @@ public class AuthDto {
         authResponse.setId(appUser.getId());
         authResponse.setName(appUser.getName());
         authResponse.setUsername(appUser.getUsername());
+        authResponse.setEmail(appUser.getEmail());
+        authResponse.setPhone_number(appUser.getPhone_number());
+        authResponse.setAddress(appUser.getAddress());
         return authResponse;
     }
+
+//    public AppUser mapToAppUser(UserRequest userRequest) {
+//        AppUser appUser = new AppUser();
+//        appUser.setId(userRequest.getId());
+//        appUser.setUsername(userRequest.getUsername());
+//        appUser.setName(userRequest.getName());
+//        appUser.setPassword(userRequest.getPassword());
+//        appUser.setEmail(userRequest.getEmail());
+//        appUser.setPhone_number(userRequest.getPhone_number());
+//        appUser.setAddress(userRequest.getAddress());
+//        return appUser;
+//    }
 }

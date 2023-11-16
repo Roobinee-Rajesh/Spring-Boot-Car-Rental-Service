@@ -1,5 +1,6 @@
 package com.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,11 +14,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class CarReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @CreationTimestamp
     private LocalDateTime reservation_date;
@@ -31,14 +31,17 @@ public class CarReservation {
     @Column(nullable = false)
     private double total_price;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private CarStatus carStatus;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private AppUser appUser;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
     private CarDetail carDetail;

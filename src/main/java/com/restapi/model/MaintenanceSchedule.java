@@ -18,10 +18,7 @@ import java.time.LocalDateTime;
 public class MaintenanceSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, length = 200)
-    private String maintenance_staff;
+    private Integer id;
 
     @Column(nullable = false)
     private LocalDateTime maintenance_date;
