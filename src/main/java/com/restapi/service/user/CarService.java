@@ -3,9 +3,13 @@ package com.restapi.service.user;
 import com.restapi.dto.CarDto;
 import com.restapi.model.CarDetail;
 import com.restapi.repository.CarDetailRepository;
+import com.restapi.request.user.CarRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,4 +29,10 @@ public class CarService {
     }
 
 
+    public List<CarDetail> findAllAvailableCars(CarRequest carRequest) throws ParseException {
+        SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = sdate.parse(carRequest.getStart_date());
+        Date endDate = sdate.parse(carRequest.getEnd_date());
+        return carDetailRepository.findByAvailablity(startDate,endDate);
+    }
 }

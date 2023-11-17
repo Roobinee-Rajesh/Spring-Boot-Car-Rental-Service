@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MaintenanceStatusRepository extends JpaRepository<MaintenanceStatus, Long> {
+public interface MaintenanceStatusRepository extends JpaRepository<MaintenanceStatus, Integer> {
     Optional<MaintenanceStatus> findByStatus(String status);
 }

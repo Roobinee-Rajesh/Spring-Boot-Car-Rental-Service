@@ -3,6 +3,7 @@ package com.restapi.controller.user;
 import com.restapi.dto.user.BookingDto;
 import com.restapi.model.CarDetail;
 import com.restapi.model.CarReservation;
+import com.restapi.request.user.CarRequest;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.user.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/booking")
+@RequestMapping("/api/user/booking")
 @PreAuthorize("hasRole('ROLE_USER')")
 public class BookingController {
     @Autowired
@@ -52,4 +53,14 @@ public class BookingController {
         apiResponse.setData(userReservationList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @PostMapping("/bookCar/{carId}/{userId}")
+    public ResponseEntity<APIResponse> getAllCurrentReservation(@PathVariable Integer carId, @RequestBody CarRequest carRequest,@PathVariable Integer userId){
+        System.out.println("Hi");
+        List<CarReservation> userReservationList= bookingService.bookCar(carId,carRequest,userId);
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(userReservationList);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
 }

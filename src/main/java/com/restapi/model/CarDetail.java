@@ -44,13 +44,14 @@ public class CarDetail {
     private AppUser maintenanceStaff;
 
     @Lob
-    @Column(name = "photo", columnDefinition="BLOB")
+    @Column(name = "photo", columnDefinition = "BLOB")
     private byte[] photo;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "carDetail")
     private List<CarReservation> carReservations;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "carDetail")
     private List<MaintenanceSchedule> maintenanceSchedulesCar;
 }

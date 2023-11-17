@@ -3,29 +3,28 @@ package com.restapi.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 
 import javax.persistence.*;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class MaintenanceSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private LocalDateTime maintenance_date;
+    private Date maintenance_date;
 
     @OneToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private MaintenanceSchedule maintenanceStatus;
+    private MaintenanceStatus maintenanceStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

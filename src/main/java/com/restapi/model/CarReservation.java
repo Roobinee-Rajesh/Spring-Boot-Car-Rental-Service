@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -26,13 +26,13 @@ public class CarReservation {
     private LocalDateTime reservation_date;
 
     @Column(nullable = false)
-    private LocalDateTime start_date;
+    private Date start_date;
 
     @Column(nullable = false)
-    private LocalDateTime end_date;
+    private Date end_date;
 
     @Column(nullable = false)
-    private double total_price;
+    private int total_price;
 
     @JsonIgnore
     @ManyToOne
@@ -43,6 +43,5 @@ public class CarReservation {
     @ManyToOne
     @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
     private CarDetail carDetail;
-
 
 }
