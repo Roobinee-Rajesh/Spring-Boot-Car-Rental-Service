@@ -1,17 +1,16 @@
 package com.restapi.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class MaintenanceStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +18,9 @@ public class MaintenanceStatus {
     @Column(nullable = false, length = 200)
     private String status;
 
-    @OneToOne(mappedBy = "maintenanceStatus")
-    private MaintenanceSchedule maintenanceSchedule;
+    @OneToMany(mappedBy = "maintenanceStatus")
+    private List<MaintenanceSchedule> maintenanceSchedules;
+
 
     public MaintenanceStatus(String status) {
         this.status = status;

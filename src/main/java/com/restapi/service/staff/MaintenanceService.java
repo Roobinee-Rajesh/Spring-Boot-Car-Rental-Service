@@ -40,6 +40,9 @@ public class MaintenanceService {
 
         maintenanceSchedule.setMaintenanceStatus(maintenanceStatus);
         maintenanceScheduleRepository.save(maintenanceSchedule);
+
+
+
         return maintenanceScheduleRepository.findAll();
     }
 }

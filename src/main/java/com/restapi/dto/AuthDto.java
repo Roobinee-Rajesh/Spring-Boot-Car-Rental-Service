@@ -32,18 +32,9 @@ public class AuthDto {
         authResponse.setEmail(appUser.getEmail());
         authResponse.setPhone_number(appUser.getPhone_number());
         authResponse.setAddress(appUser.getAddress());
+        authResponse.setRole(appUser.getRoles().getName());
         return authResponse;
     }
 
-//    public AppUser mapToAppUser(UserRequest userRequest) {
-//        AppUser appUser = new AppUser();
-//        appUser.setId(userRequest.getId());
-//        appUser.setUsername(userRequest.getUsername());
-//        appUser.setName(userRequest.getName());
-//        appUser.setPassword(userRequest.getPassword());
-//        appUser.setEmail(userRequest.getEmail());
-//        appUser.setPhone_number(userRequest.getPhone_number());
-//        appUser.setAddress(userRequest.getAddress());
-//        return appUser;
-//    }
+
 }

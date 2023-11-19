@@ -22,7 +22,7 @@ public class MaintenanceSchedule {
     @Column(nullable = false)
     private Date maintenance_date;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private MaintenanceStatus maintenanceStatus;
 
