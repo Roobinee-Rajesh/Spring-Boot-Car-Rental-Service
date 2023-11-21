@@ -10,6 +10,7 @@ import com.restapi.request.admin.AdminCarRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ public class AdminCarService {
     @Autowired
     private CarDetailRepository carDetailRepository;
 
+    @Transactional
     public CarDetail addCar(AdminCarRequest carRequest) {
         CarDetail carDetail = adminCarDto.mapToCarDetail(carRequest);
         Optional<AppUser> appUser = userRepository.findById(carRequest.getMaintenance_staff_id());
@@ -40,12 +42,13 @@ public class AdminCarService {
         return findAllCars();
     }
 
+    @Transactional
     public CarDetail updateCar(AdminCarRequest adminCarRequest) {
-        CarDetail carDetail=adminCarDto.mapToCarDetails(adminCarRequest);
+        CarDetail carDetail = adminCarDto.mapToCarDetails(adminCarRequest);
         AppUser maintenanceStaff = userRepository.findById(adminCarRequest.getMaintenance_staff_id())
                 .orElseThrow(() -> new RuntimeException("Maintenance staff not found"));
         carDetail.setMaintenanceStaff(maintenanceStaff);
-        carDetail=carDetailRepository.save(carDetail);
+        carDetail = carDetailRepository.save(carDetail);
         return carDetail;
 
     }

@@ -35,7 +35,7 @@ public class BookingService {
         return carReservationRepository.findAllUpcomingReservationsOfUser(userId, currentDate);
     }
 
-    public List<CarReservation> deleteById(Integer reservationId,Integer userId) {
+    public List<CarReservation> deleteById(Integer reservationId, Integer userId) {
         carReservationRepository.deleteById(reservationId);
         return findAllFutureReservationOfUser(userId);
     }
@@ -48,11 +48,12 @@ public class BookingService {
 
     public List<CarReservation> findAllCurrentReservationOfUser(Integer userId) {
         LocalDateTime currentDate = LocalDateTime.now();
-        return carReservationRepository.findAllCurrentReservationsOfUser(userId,currentDate);
+        return carReservationRepository.findAllCurrentReservationsOfUser(userId, currentDate);
     }
-@Transactional
-    public List<CarReservation> bookCar(Integer carId, CarRequest carRequest,Integer userId) {
-        CarReservation carReservation=bookingDto.mapToCarReservation(carId,userId,carRequest);
+
+    @Transactional
+    public List<CarReservation> bookCar(Integer carId, CarRequest carRequest, Integer userId) {
+        CarReservation carReservation = bookingDto.mapToCarReservation(carId, userId, carRequest);
         carReservationRepository.save(carReservation);
         return carReservationRepository.findAll();
     }

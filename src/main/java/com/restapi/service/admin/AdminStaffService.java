@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class AdminStaffService {
         return userRepository.findAllStaffMembers();
     }
 
+    @Transactional
     public AuthResponse registerStaff(RegisterRequest registerRequest) {
         AppUser appUser = authDto.mapToAppUser(registerRequest);
         appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
@@ -45,6 +47,7 @@ public class AdminStaffService {
         return findAllStaffMembers();
     }
 
+    @Transactional
     public AppUser updateStaff(AdminStaffRequest adminStaffRequest) {
         AppUser appUser = adminStaffDto.mapToAppUser(adminStaffRequest);
         if (adminStaffRequest.getPassword() != null) {

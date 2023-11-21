@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class MaintenanceService {
         return maintenanceDto.mapToMaintenanceResponse(maintenanceScheduleList);
     }
 
+    @Transactional
     public List<MaintenanceSchedule> updateMaintenanceStaff(MaintenanceRequest maintenanceRequest) {
         MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(maintenanceRequest.getId())
                 .orElseThrow(() -> new InvalidUserException("Maintenance not Found"));
@@ -40,9 +42,6 @@ public class MaintenanceService {
 
         maintenanceSchedule.setMaintenanceStatus(maintenanceStatus);
         maintenanceScheduleRepository.save(maintenanceSchedule);
-
-
-
         return maintenanceScheduleRepository.findAll();
     }
 }
