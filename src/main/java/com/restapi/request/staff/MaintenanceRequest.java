@@ -11,7 +11,7 @@ import java.sql.Date;
 public class MaintenanceRequest {
     private Integer id;
     private Date maintenanceDate;
-    private Integer statusId;
-    private Integer userId;
-    private Integer carDetailId;
+    private String maintenanceStatus;
+    private String userId;
+    private String carDetailId;
 }

@@ -10,7 +10,7 @@ public class AdminCarDto {
     public CarDetail mapToCarDetail(AdminCarRequest carRequest) {
         CarDetail carDetail = new CarDetail();
         carDetail.setModel(carRequest.getModel());
-        carDetail.setManufacture(carRequest.getManufacture());
+        carDetail.setManufacture(carRequest.getManufacturer());
         carDetail.setYear(carRequest.getYear());
         carDetail.setSeats(carRequest.getSeats());
         carDetail.setRental_pricing(carRequest.getRental_pricing());
@@ -27,7 +27,7 @@ public class AdminCarDto {
         adminCarResponse.setSeats(carDetail.getSeats());
         adminCarResponse.setRental_pricing(carDetail.getRental_pricing());
         adminCarResponse.setPhoto(carDetail.getPhoto());
-        adminCarResponse.setMaintenance_staff_id(carDetail.getMaintenanceStaff().getId());
+        adminCarResponse.setMaintenance_staff(carDetail.getMaintenanceStaff().getName());
         adminCarResponse.setMaintenance_schedule(carDetail.getMaintenance_schedule());
         return adminCarResponse;
     }
@@ -36,7 +36,7 @@ public class AdminCarDto {
         CarDetail carDetail=new CarDetail();
         carDetail.setId(adminCarRequest.getId());
         carDetail.setModel(adminCarRequest.getModel());
-        carDetail.setManufacture(adminCarRequest.getManufacture());
+        carDetail.setManufacture(adminCarRequest.getManufacturer());
         carDetail.setYear(adminCarRequest.getYear());
         carDetail.setSeats(adminCarRequest.getSeats());
         carDetail.setRental_pricing(adminCarRequest.getRental_pricing());

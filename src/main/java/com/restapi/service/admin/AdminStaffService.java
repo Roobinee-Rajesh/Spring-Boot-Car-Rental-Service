@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +30,16 @@ public class AdminStaffService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<AppUser> findAllStaffMembers() {
-        return userRepository.findAllStaffMembers();
+    public List<AuthResponse> findAllStaffMembers() {
+        List<AppUser> appUsers = userRepository.findAllStaffMembers();
+        List<AuthResponse> authResponses = new ArrayList<>();
+
+        for (AppUser appUser : appUsers) {
+            AuthResponse authResponse = authDto.mapToAuthResponse(appUser);
+            authResponses.add(authResponse);
+        }
+
+        return authResponses;
     }
 
     @Transactional
@@ -42,7 +51,7 @@ public class AdminStaffService {
         return authDto.mapToAuthResponse(appUser);
     }
 
-    public List<AppUser> deleteById(Integer id) {
+    public List<AuthResponse> deleteById(Integer id) {
         userRepository.deleteById(id);
         return findAllStaffMembers();
     }

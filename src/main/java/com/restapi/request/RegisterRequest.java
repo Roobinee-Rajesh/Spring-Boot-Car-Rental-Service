@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -15,15 +12,15 @@ public class RegisterRequest {
 
     private Integer id;
 
-    @NotEmpty
+    @NotEmpty(message = "Username can't be empty")
     @Size(min = 2, message = "Username should have at least 2 characters")
-    private String username;
+    private String userName;
 
-    @NotEmpty
+    @NotEmpty(message = "Password can't be empty")
     @Size(min = 2, message = "Password should have at least 2 characters")
     private String password;
 
-    @NotEmpty
+    @NotEmpty(message = "Name can't be empty")
     @Size(min = 2, message = "Name should have at least 2 characters")
     private String name;
 
@@ -31,10 +28,9 @@ public class RegisterRequest {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotNull(message = "Phone number cannot be empty")
-    private Integer phone_number;
-
     @NotEmpty(message = "Address cannot be empty")
     private String address;
 
+//    @NotEmpty(message = "Phone number cannot be empty")
+    private String phoneNumber;
 }

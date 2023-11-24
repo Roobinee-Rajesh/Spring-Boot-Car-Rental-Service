@@ -3,6 +3,7 @@ package com.restapi.controller.admin;
 import com.restapi.model.CarReservation;
 import com.restapi.model.MaintenanceSchedule;
 import com.restapi.response.common.APIResponse;
+import com.restapi.response.staff.MaintenanceResponse;
 import com.restapi.service.admin.AdminBookingService;
 import com.restapi.service.admin.AdminMaintenanceService;
 import com.sun.tools.javac.Main;
@@ -27,7 +28,7 @@ public class AdminMaintenanceController {
 
     @GetMapping("/maintenance")
     public ResponseEntity<APIResponse> getAllCurrentMonthMaintenance(){
-        List<MaintenanceSchedule> currentMonthMaintenance= adminMaintenanceService.findAllCurrentMonthMaintenance();
+        List<MaintenanceResponse> currentMonthMaintenance= adminMaintenanceService.findAllCurrentMonthMaintenance();
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(currentMonthMaintenance);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);

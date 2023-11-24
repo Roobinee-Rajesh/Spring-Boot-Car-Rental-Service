@@ -14,11 +14,11 @@ public class AuthDto {
         if (user.getId() != null) {
             appUser.setId(user.getId());
         }
-        appUser.setUsername(user.getUsername());
+        appUser.setUsername(user.getUserName());
         appUser.setName(user.getName());
         appUser.setPassword(user.getPassword());
         appUser.setEmail(user.getEmail());
-        appUser.setPhone_number(user.getPhone_number());
+        appUser.setPhone_number(user.getPhoneNumber());
         appUser.setAddress(user.getAddress());
         return appUser;
     }

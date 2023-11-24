@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Component
 @Getter
@@ -15,29 +16,30 @@ public class AdminCarRequest {
 
     private Integer id;
 
-    @NotEmpty
+    @NotEmpty(message = "Manufacture can't be empty")
     @Size(min = 3, message = "Manufacture should have at least 3 characters")
-    private String manufacture;
+    private String manufacturer;
 
-    @NotEmpty
-    @Size(min = 3, message = "Manufacture should have at least 3 characters")
+    @NotEmpty(message = "Model can't be empty")
+    @Size(min = 3, message = "Model should have at least 3 characters")
     private String model;
 
-    @NotNull
+    @NotNull(message = "Year can't be empty")
     private int year;
 
-    @NotNull
+    @NotNull(message = "Seats can't be empty")
     private int seats;
 
-    @NotNull
-    private double rental_pricing;
+    @NotNull(message = "Rental proce can't be empty")
+    private int rental_pricing;
 
 
-    @NotNull
+    @NotNull(message = "Maintenance Schedule can't be empty")
     private int maintenance_schedule;
 
     private byte[] photo;
 
-    private Integer maintenance_staff_id;
+    @NotNull(message = "Staff can't be empty")
+    private String maintenance_staff_id;
 
 }

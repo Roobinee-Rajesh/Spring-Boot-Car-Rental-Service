@@ -13,7 +13,7 @@ public interface MaintenanceScheduleRepository extends JpaRepository<Maintenance
     @Query("SELECT ms FROM MaintenanceSchedule ms " +
             "WHERE ms.appUser.id = :staffId " +
             "AND MONTH(ms.maintenance_date) = MONTH(CURRENT_DATE) " +
-            "AND YEAR(ms.maintenance_date) = YEAR(CURRENT_DATE)")
+            "AND YEAR(ms.maintenance_date) = YEAR(CURRENT_DATE)" + "AND maintenanceStatus= 1")
     List<MaintenanceSchedule> findByStaffIdAndCurrentMonth(@Param("staffId") Integer staffId);
     @Query("SELECT ms FROM MaintenanceSchedule ms " +
             "WHERE MONTH(ms.maintenance_date) = MONTH(CURRENT_DATE) " +

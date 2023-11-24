@@ -38,7 +38,7 @@ public class AdminStaffController {
 
     @GetMapping("/viewStaff")
     public ResponseEntity<APIResponse> getAllStaff(){
-        List<AppUser> staffList= staffService.findAllStaffMembers();
+        List<AuthResponse> staffList= staffService.findAllStaffMembers();
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(staffList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
@@ -53,7 +53,7 @@ public class AdminStaffController {
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<APIResponse> deleteStaff(@PathVariable Integer id) {
-        List<AppUser> staffList = staffService.deleteById(id);
+        List<AuthResponse> staffList = staffService.deleteById(id);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(staffList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);

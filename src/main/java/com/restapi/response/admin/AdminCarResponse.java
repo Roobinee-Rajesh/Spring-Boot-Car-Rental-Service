@@ -1,8 +1,12 @@
 package com.restapi.response.admin;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 @Getter
@@ -15,6 +19,6 @@ public class AdminCarResponse {
     private int seats;
     private double rental_pricing;
     private byte[] photo;
-    private Integer maintenance_staff_id;
+    private String maintenance_staff;
     private int maintenance_schedule;
 }

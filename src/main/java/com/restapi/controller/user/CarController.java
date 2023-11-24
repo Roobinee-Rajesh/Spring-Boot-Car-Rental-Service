@@ -3,6 +3,7 @@ package com.restapi.controller.user;
 import com.restapi.model.CarDetail;
 import com.restapi.request.user.CarRequest;
 import com.restapi.response.common.APIResponse;
+import com.restapi.response.user.CarResponse;
 import com.restapi.service.user.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,9 +42,9 @@ public class CarController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/allAvailableCars")
-    public ResponseEntity<APIResponse> getAllAvailableCars(@RequestBody CarRequest carRequest) throws ParseException {
-        List<CarDetail> availableCarList = carService.findAllAvailableCars(carRequest);
+    @GetMapping("/allAvailableCars/{start_date}/{end_date}")
+    public ResponseEntity<APIResponse> getAllAvailableCars(@PathVariable String start_date,@PathVariable String end_date) throws ParseException {
+        List<CarResponse> availableCarList = carService.findAllAvailableCars(start_date,end_date);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(availableCarList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);

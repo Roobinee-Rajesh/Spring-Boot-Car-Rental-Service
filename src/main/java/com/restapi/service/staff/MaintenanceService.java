@@ -37,7 +37,7 @@ public class MaintenanceService {
     public List<MaintenanceSchedule> updateMaintenanceStaff(MaintenanceRequest maintenanceRequest) {
         MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(maintenanceRequest.getId())
                 .orElseThrow(() -> new InvalidUserException("Maintenance not Found"));
-        MaintenanceStatus maintenanceStatus = maintenanceStatusRepository.findById(maintenanceRequest.getStatusId())
+        MaintenanceStatus maintenanceStatus = maintenanceStatusRepository.findById(Integer.valueOf(maintenanceRequest.getMaintenanceStatus()))
                 .orElseThrow(() -> new InvalidUserException("Status not Found"));
 
         maintenanceSchedule.setMaintenanceStatus(maintenanceStatus);

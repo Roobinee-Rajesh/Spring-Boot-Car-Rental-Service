@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -27,7 +28,7 @@ public class UserService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+@Transactional
     public AuthResponse register(RegisterRequest registerRequest) {
         AppUser appUser = authDto.mapToAppUser(registerRequest);
 //        System.out.println(appUser.getName());

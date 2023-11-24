@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,7 +34,7 @@ public class CarDetail {
     private int seats;
 
     @Column(nullable = false)
-    private double rental_pricing;
+    private int rental_pricing;
 
     @Column(nullable = false)
     private int maintenance_schedule;

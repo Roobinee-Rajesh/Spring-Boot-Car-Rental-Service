@@ -8,13 +8,14 @@ import com.restapi.repository.CarDetailRepository;
 import com.restapi.repository.CarReservationRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.user.CarRequest;
+import com.restapi.response.user.BookingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,31 +31,46 @@ public class BookingService {
     @Autowired
     UserRepository userRepository;
 
-    public List<CarReservation> findAllFutureReservationOfUser(Integer userId) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        return carReservationRepository.findAllUpcomingReservationsOfUser(userId, currentDate);
+    public List<BookingResponse> findAllFutureReservationOfUser(Integer userId) {
+//        LocalDateTime currentDate = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        String formattedDate = currentDate.format(formatter);
+//        Date currentDateAsDate = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+        Date currentDateAsDate=getCurrentDate();
+        List<CarReservation> carReservation = carReservationRepository.findAllUpcomingReservationsOfUser(userId, currentDateAsDate);
+        return bookingDto.mapToBookingResponse(carReservation);
     }
 
-    public List<CarReservation> deleteById(Integer reservationId, Integer userId) {
+    public List<BookingResponse> deleteById(Integer reservationId, Integer userId) {
         carReservationRepository.deleteById(reservationId);
         return findAllFutureReservationOfUser(userId);
     }
 
-    public List<CarReservation> findAllPastReservationOfUser(Integer userId) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        return carReservationRepository.findAllPastReservationsOfUser(userId, currentDate);
+    public List<BookingResponse> findAllPastReservationOfUser(Integer userId) {
+        Date currentDateAsDate=getCurrentDate();
+        List<CarReservation> carReservation = carReservationRepository.findAllPastReservationsOfUser(userId, currentDateAsDate);
+        return bookingDto.mapToBookingResponse(carReservation);
     }
 
 
-    public List<CarReservation> findAllCurrentReservationOfUser(Integer userId) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        return carReservationRepository.findAllCurrentReservationsOfUser(userId, currentDate);
+    public List<BookingResponse> findAllCurrentReservationOfUser(Integer userId) {
+        Date currentDateAsDate=getCurrentDate();
+        List<CarReservation> carReservation = carReservationRepository.findAllCurrentReservationsOfUser(userId, currentDateAsDate);
+        return bookingDto.mapToBookingResponse(carReservation);
     }
 
     @Transactional
-    public List<CarReservation> bookCar(Integer carId, CarRequest carRequest, Integer userId) {
-        CarReservation carReservation = bookingDto.mapToCarReservation(carId, userId, carRequest);
+    public List<CarReservation> bookCar( CarRequest carRequest) {
+        CarReservation carReservation = bookingDto.mapToCarReservation(carRequest);
         carReservationRepository.save(carReservation);
         return carReservationRepository.findAll();
+    }
+
+    public Date getCurrentDate() {
+        LocalDateTime currentDate = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = currentDate.format(formatter);
+        Date currentDateAsDate = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+        return currentDateAsDate;
     }
 }

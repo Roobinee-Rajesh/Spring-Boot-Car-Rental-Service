@@ -27,7 +27,7 @@ public class AdminCarService {
     @Transactional
     public CarDetail addCar(AdminCarRequest carRequest) {
         CarDetail carDetail = adminCarDto.mapToCarDetail(carRequest);
-        Optional<AppUser> appUser = userRepository.findById(carRequest.getMaintenance_staff_id());
+        Optional<AppUser> appUser = userRepository.findById(Integer.valueOf(carRequest.getMaintenance_staff_id()));
         carDetail.setMaintenanceStaff(appUser.orElseThrow(() -> new RuntimeException("Maintenance staff not found")));
         carDetailRepository.save(carDetail);
         return carDetail;
@@ -45,7 +45,7 @@ public class AdminCarService {
     @Transactional
     public CarDetail updateCar(AdminCarRequest adminCarRequest) {
         CarDetail carDetail = adminCarDto.mapToCarDetails(adminCarRequest);
-        AppUser maintenanceStaff = userRepository.findById(adminCarRequest.getMaintenance_staff_id())
+        AppUser maintenanceStaff = userRepository.findById(Integer.valueOf(adminCarRequest.getMaintenance_staff_id()))
                 .orElseThrow(() -> new RuntimeException("Maintenance staff not found"));
         carDetail.setMaintenanceStaff(maintenanceStaff);
         carDetail = carDetailRepository.save(carDetail);

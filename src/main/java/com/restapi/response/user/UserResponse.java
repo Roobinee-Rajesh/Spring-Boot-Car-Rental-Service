@@ -16,12 +16,8 @@ public class UserResponse {
     private Integer id;
     private String username;
     private String password;
-
     private String name;
-
     private String email;
-
     private Integer phone_number;
-
     private String address;
 }

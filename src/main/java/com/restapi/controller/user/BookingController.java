@@ -5,6 +5,7 @@ import com.restapi.model.CarDetail;
 import com.restapi.model.CarReservation;
 import com.restapi.request.user.CarRequest;
 import com.restapi.response.common.APIResponse;
+import com.restapi.response.user.BookingResponse;
 import com.restapi.service.user.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @RestController
@@ -24,7 +26,7 @@ public class BookingController {
     private BookingService bookingService;
     @GetMapping("/futurereservation/{userId}")
     public ResponseEntity<APIResponse> getAllFutureReservation(@PathVariable Integer userId){
-        List<CarReservation> userReservationList= bookingService.findAllFutureReservationOfUser(userId);
+        List<BookingResponse> userReservationList= bookingService.findAllFutureReservationOfUser(userId);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(userReservationList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
@@ -32,7 +34,7 @@ public class BookingController {
 
     @DeleteMapping("/delete/{reservationId}/{userId}")
     public ResponseEntity<APIResponse> deleteCar(@PathVariable Integer reservationId,@PathVariable Integer userId) {
-        List<CarReservation> userReservationList = bookingService.deleteById(reservationId,userId);
+        List<BookingResponse> userReservationList = bookingService.deleteById(reservationId,userId);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(userReservationList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
@@ -40,7 +42,7 @@ public class BookingController {
 
     @GetMapping("/pastreservation/{userId}")
     public ResponseEntity<APIResponse> getAllPastReservation(@PathVariable Integer userId){
-        List<CarReservation> userReservationList= bookingService.findAllPastReservationOfUser(userId);
+        List<BookingResponse> userReservationList= bookingService.findAllPastReservationOfUser(userId);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(userReservationList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
@@ -48,16 +50,16 @@ public class BookingController {
 
     @GetMapping("/currentreservation/{userId}")
     public ResponseEntity<APIResponse> getAllCurrentReservation(@PathVariable Integer userId){
-        List<CarReservation> userReservationList= bookingService.findAllCurrentReservationOfUser(userId);
+        List<BookingResponse> userReservationList= bookingService.findAllCurrentReservationOfUser(userId);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(userReservationList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/bookCar/{carId}/{userId}")
-    public ResponseEntity<APIResponse> getAllCurrentReservation(@PathVariable Integer carId, @RequestBody CarRequest carRequest,@PathVariable Integer userId){
-        System.out.println("Hi");
-        List<CarReservation> userReservationList= bookingService.bookCar(carId,carRequest,userId);
+    @PostMapping("/bookCar")
+    public ResponseEntity<APIResponse> getAllCurrentReservation(@RequestBody CarRequest carRequest){
+//        System.out.println("Hi");
+        List<CarReservation> userReservationList= bookingService.bookCar(carRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(userReservationList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);

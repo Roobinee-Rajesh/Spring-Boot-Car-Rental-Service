@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -43,7 +44,7 @@ public class AppUser {
     private String email;
 
     @Column(nullable = false, length = 10)
-    private Integer phone_number;
+    private String phone_number;
 
     @Column(nullable = false, length = 100)
     private String address;
@@ -64,6 +65,6 @@ public class AppUser {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
 }

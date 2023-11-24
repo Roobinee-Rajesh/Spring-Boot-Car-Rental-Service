@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
@@ -13,9 +14,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class CarRequest {
-    @NotEmpty
+    @NotNull(message = "User ID can't be empty")
+    private int userId;
+
+    @NotNull(message = "Car ID can't be empty")
+    private int carId;
+    @NotEmpty(message = "Start date can't be empty")
     private String  start_date;
 
-    @NotEmpty
+    @NotEmpty(message = "End date can't be empty")
     private String  end_date;
 }

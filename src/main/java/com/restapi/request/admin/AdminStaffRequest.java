@@ -27,7 +27,7 @@ public class AdminStaffRequest {
     private String email;
 
     @NotEmpty(message = "Phone number cannot be empty")
-    private Integer phone_number;
+    private String phone_number;
 
     @NotEmpty(message = "Address cannot be empty")
     private String address;

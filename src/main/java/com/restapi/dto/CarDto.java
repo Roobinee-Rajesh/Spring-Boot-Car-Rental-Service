@@ -1,23 +1,29 @@
 package com.restapi.dto;
 
 import com.restapi.model.CarDetail;
+import com.restapi.model.CarReservation;
 import com.restapi.response.user.CarResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class CarDto {
-    private CarResponse convertToCarDto(CarDetail carDetail) {
-        CarResponse carRespose=new CarResponse();
-        carRespose.setId(carDetail.getId());
-        carRespose.setManufacture(carDetail.getManufacture());
-        carRespose.setModel(carDetail.getModel());
-        carRespose.setYear(carDetail.getYear());
-        carRespose.setSeats(carDetail.getSeats());
-        carRespose.setRental_pricing(carDetail.getRental_pricing());
-        carRespose.setPhoto(carDetail.getPhoto());
-//        carRespose.setMaintenance_schedule(carDetail.getMaintenanceSchedule());
-//        carRespose.setMaintenanceStaff(carDetail.getMaintenanceStaff());
-//        carRespose.setIsBooked(carDetail.getIsBooked());
-        return carRespose;
+    public List<CarResponse> mapToCarResponse(List<CarDetail> carDetail) {
+        List<CarResponse> carResponseList = new ArrayList<>();
+        for (CarDetail c : carDetail) {
+            CarResponse carRespose = new CarResponse();
+            carRespose.setId(c.getId());
+            carRespose.setManufacture(c.getManufacture());
+            carRespose.setModel(c.getModel());
+            carRespose.setYear(c.getYear());
+            carRespose.setSeats(c.getSeats());
+            carRespose.setRental_pricing(c.getRental_pricing());
+            carRespose.setPhoto(c.getPhoto());
+
+            carResponseList.add(carRespose);
+        }
+        return carResponseList;
     }
 }

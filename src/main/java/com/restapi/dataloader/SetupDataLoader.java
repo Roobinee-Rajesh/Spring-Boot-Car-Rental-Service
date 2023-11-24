@@ -44,9 +44,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Role adminRole = createRoleIfNotFound(Role.ADMIN);
         Role staffRole = createRoleIfNotFound(Role.STAFF);
 //        Create user
-        createUserIfNotFound("user", "user@user.com", "user", 1234567891, "Chennai", userRole);
-        createUserIfNotFound("admin", "admin@admin.com", "admin", 1234567892, "Theni", adminRole);
-        createUserIfNotFound("staff", "staff@staff.com", "staff", 1234567893, "Chengalpet", staffRole);
+        createUserIfNotFound("user", "user@user.com", "user", "1234567891", "Chennai", userRole);
+        createUserIfNotFound("admin", "admin@admin.com", "admin", "1234567892", "Theni", adminRole);
+        createUserIfNotFound("staff", "staff@staff.com", "staff", "1234567893", "Chengalpet", staffRole);
 
         createMaintenanceStatusIfNotFound("Pending");
         createMaintenanceStatusIfNotFound("Maintenance Done");
@@ -77,7 +77,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    private AppUser createUserIfNotFound(final String username, final String email, final String password, final Integer phone_number, final String address,
+    private AppUser createUserIfNotFound(final String username, final String email, final String password, final String phone_number, final String address,
                                          final Role role) {
         Optional<AppUser> optionalUser = userRepository.findByUsername(username);
         AppUser user = null;
