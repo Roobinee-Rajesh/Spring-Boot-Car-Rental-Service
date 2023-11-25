@@ -33,6 +33,7 @@ public class AuthDto {
         authResponse.setPhone_number(appUser.getPhone_number());
         authResponse.setAddress(appUser.getAddress());
         authResponse.setRole(appUser.getRoles().getName());
+        authResponse.setPassword(appUser.getPassword());
         return authResponse;
     }
 

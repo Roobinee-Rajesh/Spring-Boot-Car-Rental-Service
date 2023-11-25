@@ -13,4 +13,5 @@ public class AuthResponse {
     private String phone_number;
     private String address;
     private String role;
+    private String password;
 }

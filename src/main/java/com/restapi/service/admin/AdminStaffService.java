@@ -59,9 +59,9 @@ public class AdminStaffService {
     @Transactional
     public AppUser updateStaff(AdminStaffRequest adminStaffRequest) {
         AppUser appUser = adminStaffDto.mapToAppUser(adminStaffRequest);
-        if (adminStaffRequest.getPassword() != null) {
-            appUser.setPassword(bCryptPasswordEncoder.encode(adminStaffRequest.getPassword()));
-        }
+//        if (adminStaffRequest.getPassword() != null) {
+//            appUser.setPassword(bCryptPasswordEncoder.encode(adminStaffRequest.getPassword()));
+//        }
         appUser.setRoles(roleRepository.findByName(Role.STAFF));
         appUser = userRepository.save(appUser);
         return appUser;

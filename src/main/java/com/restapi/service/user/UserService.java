@@ -65,7 +65,7 @@ public class UserService {
 public AuthResponse updateUser(RegisterRequest registerRequest) {
     AppUser appUser = authDto.mapToAppUser(registerRequest);
 //        System.out.println(appUser.getName());
-    appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
+
     appUser.setRoles(roleRepository.findByName(Role.USER));
     appUser = userRepository.save(appUser);
     return authDto.mapToAuthResponse(appUser);
