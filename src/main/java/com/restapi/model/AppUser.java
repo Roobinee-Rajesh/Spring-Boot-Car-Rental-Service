@@ -60,7 +60,7 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     private List<MaintenanceSchedule> maintenanceSchedulesUser;
 
-    @OneToMany(mappedBy = "maintenanceStaff")
+    @OneToMany(mappedBy = "maintenanceStaff", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarDetail> carDetails;
 
     @CreationTimestamp

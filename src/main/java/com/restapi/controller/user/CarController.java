@@ -8,6 +8,7 @@ import com.restapi.service.user.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -34,6 +35,7 @@ public class CarController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/carById/{carId}")
     public ResponseEntity<APIResponse> findCarById(@PathVariable Integer carId) {
         Optional<CarDetail> carDetail = carService.findCarById(carId);

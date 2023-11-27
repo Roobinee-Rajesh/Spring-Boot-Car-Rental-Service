@@ -52,6 +52,8 @@ public class SecurityConfig {
                 .permitAll()
                 .antMatchers("/swagger-ui/**")
                 .permitAll()
+                .antMatchers("/api/user/car/allAvailableCars/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic()
