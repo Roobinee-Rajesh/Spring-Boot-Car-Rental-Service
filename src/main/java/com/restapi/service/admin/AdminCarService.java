@@ -7,6 +7,7 @@ import com.restapi.model.Role;
 import com.restapi.repository.CarDetailRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.admin.AdminCarRequest;
+import com.restapi.response.admin.AdminCarResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +34,13 @@ public class AdminCarService {
         return carDetail;
     }
 
-    public List<CarDetail> findAllCars() {
-        return carDetailRepository.findAll();
+    public List<AdminCarResponse> findAllCars() {
+        List<CarDetail> carDetailsList= carDetailRepository.findAll();
+        List<AdminCarResponse> adminCarResponse=adminCarDto.mapToAdminCarResponse(carDetailsList);
+return adminCarResponse;
     }
 
-    public List<CarDetail> deleteById(Integer id) {
+    public List<AdminCarResponse> deleteById(Integer id) {
         carDetailRepository.deleteById(id);
         return findAllCars();
     }

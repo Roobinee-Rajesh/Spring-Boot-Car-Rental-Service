@@ -34,10 +34,12 @@ public class AdminCarRequest {
     private int rental_pricing;
 
 
+
     @NotNull(message = "Maintenance Schedule can't be empty")
     private int maintenance_schedule;
 
-    private byte[] photo;
+//    @NotNull(message = "Photo can't be empty")
+    private String photo;
 
     @NotNull(message = "Staff can't be empty")
     private String maintenance_staff_id;

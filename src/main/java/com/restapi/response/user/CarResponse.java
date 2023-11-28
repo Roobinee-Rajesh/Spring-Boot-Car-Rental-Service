@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @Setter
 public class CarResponse {
     private Integer id;
-    private String manufacture;
+    private String manufacturer;
     private String model;
     private int year;
     private int seats;
     private double rental_pricing;
-    private byte[] photo;
+    private String photo;
 }
 

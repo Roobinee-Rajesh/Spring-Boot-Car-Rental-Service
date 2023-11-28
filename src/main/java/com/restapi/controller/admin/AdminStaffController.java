@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class AdminStaffController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/update")
+@Transactional
+    @PutMapping("/update")
     public ResponseEntity<APIResponse> updateStaff(@RequestBody AdminStaffRequest adminStaffRequest){
         AppUser updateStaff=staffService.updateStaff(adminStaffRequest);
         apiResponse.setStatus(HttpStatus.OK.value());

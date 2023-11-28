@@ -22,7 +22,7 @@ public class CarDetail {
     private Integer id;
 
     @Column(nullable = false, length = 200)
-    private String manufacture;
+    private String manufacturer;
 
     @Column(nullable = false, length = 200)
     private String model;
@@ -44,9 +44,8 @@ public class CarDetail {
     @JoinColumn(name = "maintenance_staff_id", referencedColumnName = "id")
     private AppUser maintenanceStaff;
 
-    @Lob
-    @Column(name = "photo", columnDefinition = "BLOB")
-    private byte[] photo;
+    @Column(name = "photo")
+    private String photo;
 
     @JsonIgnore
     @OneToMany(mappedBy = "carDetail")

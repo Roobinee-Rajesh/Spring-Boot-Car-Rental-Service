@@ -19,7 +19,9 @@ public class AdminMaintenanceService {
 
 
     public List<MaintenanceResponse> findAllCurrentMonthMaintenance() {
+        System.out.println("findAllCurrentMonthMaintenance");
         List<MaintenanceSchedule> maintenanceScheduleList= maintenanceScheduleRepository.findByCurrentMonth();
+        System.out.println(maintenanceDto.mapToMaintenanceResponse(maintenanceScheduleList));
         return maintenanceDto.mapToMaintenanceResponse(maintenanceScheduleList);
     }
 }

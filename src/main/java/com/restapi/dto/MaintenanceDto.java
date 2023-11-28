@@ -26,9 +26,10 @@ public class MaintenanceDto {
     private CarDetailRepository carDetailRepository;
     public List<MaintenanceResponse> mapToMaintenanceResponse(List<MaintenanceSchedule> maintenanceScheduleList) {
         List<MaintenanceResponse> maintenanceResponseList = new ArrayList<>();
-
+        System.out.println("mapToMaintenanceResponse");
         for (MaintenanceSchedule maintenanceSchedule : maintenanceScheduleList) {
             MaintenanceResponse maintenanceResponse = new MaintenanceResponse();
+            System.out.println("in");
             maintenanceResponse.setId(maintenanceSchedule.getId());
             maintenanceResponse.setMaintenanceDate(maintenanceSchedule.getMaintenance_date());
             Optional<MaintenanceStatus> maintenanceStatus = maintenanceStatusRepository.findById(maintenanceSchedule.getId());
@@ -39,7 +40,7 @@ public class MaintenanceDto {
             maintenanceResponse.setCarName(carDetail1.get().getModel());
             maintenanceResponseList.add(maintenanceResponse);
         }
-
+        System.out.println("maintenanceResponseList");
         return maintenanceResponseList;
 
     }

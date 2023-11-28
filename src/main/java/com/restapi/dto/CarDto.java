@@ -15,7 +15,7 @@ public class CarDto {
         for (CarDetail c : carDetail) {
             CarResponse carRespose = new CarResponse();
             carRespose.setId(c.getId());
-            carRespose.setManufacture(c.getManufacture());
+            carRespose.setManufacturer(c.getManufacturer());
             carRespose.setModel(c.getModel());
             carRespose.setYear(c.getYear());
             carRespose.setSeats(c.getSeats());

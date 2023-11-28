@@ -43,7 +43,7 @@ public class AppUser {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 13)
     private String phone_number;
 
     @Column(nullable = false, length = 100)
@@ -60,7 +60,7 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     private List<MaintenanceSchedule> maintenanceSchedulesUser;
 
-    @OneToMany(mappedBy = "maintenanceStaff", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "maintenanceStaff")
     private List<CarDetail> carDetails;
 
     @CreationTimestamp
