@@ -86,41 +86,14 @@ public class AdminCarController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-//    @PostMapping("/updateCar/id/{id}")
-//    public ResponseEntity<APIResponse> updateStaff(@RequestBody AdminCarRequest adminCarRequest){
-//        CarDetail updateCar=adminCarService.updateCar(adminCarRequest);
-//        apiResponse.setStatus(HttpStatus.OK.value());
-//        apiResponse.setData(updateCar);
-//        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-//    }
-
     @PostMapping("/updateCar")
-    public ResponseEntity<APIResponse> updateStaff(@RequestParam("photo") String photo,
-                                                   @RequestParam("manufacturer") String manufacturer,
-                                                   @RequestParam("model") String model,
-                                                   @RequestParam("year") int year,
-                                                   @RequestParam("seats") int seats,
-                                                   @RequestParam("rental_pricing") int rental_pricing,
-                                                   @RequestParam("maintenance_schedule") int maintenance_schedule,
-                                                   @RequestParam("maintenance_staff_id") int maintenance_staff_id,
-                                                   @RequestParam("id") int id){
-
-//        String file = storageService.storeFile(photo);
-        AdminCarRequest adminCarRequest = new AdminCarRequest();
-        adminCarRequest.setPhoto(photo);
-        adminCarRequest.setManufacturer(manufacturer);
-        adminCarRequest.setModel(model);
-        adminCarRequest.setYear(year);
-        adminCarRequest.setSeats(seats);
-        adminCarRequest.setRental_pricing(rental_pricing);
-        adminCarRequest.setMaintenance_staff_id(String.valueOf(maintenance_staff_id));
-        adminCarRequest.setMaintenance_schedule(maintenance_schedule);
-        adminCarRequest.setId(id);
+    public ResponseEntity<APIResponse> updateStaff(@RequestBody AdminCarRequest adminCarRequest){
         CarDetail updateCar=adminCarService.updateCar(adminCarRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(updateCar);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<APIResponse> deleteCar(@PathVariable Integer id) {

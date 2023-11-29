@@ -31,13 +31,18 @@ public class MaintenanceDto {
             MaintenanceResponse maintenanceResponse = new MaintenanceResponse();
             System.out.println("in");
             maintenanceResponse.setId(maintenanceSchedule.getId());
+            System.out.println("id");
             maintenanceResponse.setMaintenanceDate(maintenanceSchedule.getMaintenance_date());
-            Optional<MaintenanceStatus> maintenanceStatus = maintenanceStatusRepository.findById(maintenanceSchedule.getId());
+            System.out.println("date");
+            Optional<MaintenanceStatus> maintenanceStatus = maintenanceStatusRepository.findById(maintenanceSchedule.getMaintenanceStatus().getId());
             maintenanceResponse.setMaintenanceStatus(maintenanceStatus.get().getStatus());
+            System.out.println("status");
             Optional<AppUser> appUser = userRepository.findById(maintenanceSchedule.getAppUser().getId());
             maintenanceResponse.setUserName(appUser.get().getName());
+            System.out.println("user");
             Optional<CarDetail> carDetail1 = carDetailRepository.findById(maintenanceSchedule.getCarDetail().getId());
             maintenanceResponse.setCarName(carDetail1.get().getModel());
+            System.out.println("car");
             maintenanceResponseList.add(maintenanceResponse);
         }
         System.out.println("maintenanceResponseList");

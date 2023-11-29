@@ -52,6 +52,7 @@ public class CarDetail {
     private List<CarReservation> carReservations;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "carDetail")
-    private List<MaintenanceSchedule> maintenanceSchedulesCar;
+    @OneToMany(mappedBy = "carDetail", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MaintenanceSchedule> maintenanceSchedules;
+
 }

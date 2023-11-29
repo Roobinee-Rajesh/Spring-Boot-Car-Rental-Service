@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 public interface CarDetailRepository extends JpaRepository<CarDetail, Integer> {
-
+//    List<CarDetail> findByMaintenance_scheduleGreaterThan(int maintenanceSchedule);
     @Query("SELECT c FROM CarDetail c WHERE c.id = :carId")
     CarDetail findCarById(@Param("carId") Integer carId);
     @Query(value = "SELECT DISTINCT cd.* FROM car_detail cd " +

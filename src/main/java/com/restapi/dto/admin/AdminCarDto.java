@@ -43,7 +43,7 @@ public class AdminCarDto {
         carDetail.setYear(adminCarRequest.getYear());
         carDetail.setSeats(adminCarRequest.getSeats());
         carDetail.setRental_pricing(adminCarRequest.getRental_pricing());
-        carDetail.setPhoto(adminCarRequest.getPhoto());
+//        carDetail.setPhoto(adminCarRequest.getPhoto());
         carDetail.setMaintenance_schedule(adminCarRequest.getMaintenance_schedule());
         return carDetail;
     }
