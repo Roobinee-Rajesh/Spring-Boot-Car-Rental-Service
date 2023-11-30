@@ -32,7 +32,7 @@ public class MaintenanceController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PutMapping("/UpdateStatus")
+    @PostMapping("/updateStatus")
     public ResponseEntity<APIResponse> updateMaintenanceStatus(@RequestBody MaintenanceRequest maintenanceRequest){
         List<MaintenanceSchedule> updatedMaintenanceSchudeleList= maintenanceService.updateMaintenanceStaff(maintenanceRequest);
         apiResponse.setStatus(HttpStatus.OK.value());

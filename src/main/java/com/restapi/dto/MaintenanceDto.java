@@ -33,7 +33,7 @@ public class MaintenanceDto {
             maintenanceResponse.setId(maintenanceSchedule.getId());
             System.out.println("id");
             maintenanceResponse.setMaintenanceDate(maintenanceSchedule.getMaintenance_date());
-            System.out.println("date");
+            System.out.println(maintenanceSchedule.getMaintenance_date());
             Optional<MaintenanceStatus> maintenanceStatus = maintenanceStatusRepository.findById(maintenanceSchedule.getMaintenanceStatus().getId());
             maintenanceResponse.setMaintenanceStatus(maintenanceStatus.get().getStatus());
             System.out.println("status");

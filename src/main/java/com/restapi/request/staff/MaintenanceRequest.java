@@ -10,7 +10,7 @@ import java.sql.Date;
 @Setter
 public class MaintenanceRequest {
     private Integer id;
-    private Date maintenanceDate;
+    private String maintenanceDate;
     private String maintenanceStatus;
     private String userId;
     private String carDetailId;

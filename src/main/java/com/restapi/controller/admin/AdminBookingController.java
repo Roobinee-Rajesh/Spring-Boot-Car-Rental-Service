@@ -2,6 +2,7 @@ package com.restapi.controller.admin;
 
 import com.restapi.model.CarReservation;
 import com.restapi.response.common.APIResponse;
+import com.restapi.response.user.BookingResponse;
 import com.restapi.service.admin.AdminBookingService;
 import com.restapi.service.admin.AdminCarService;
 import com.restapi.service.user.BookingService;
@@ -27,7 +28,7 @@ public class AdminBookingController {
 
     @GetMapping("/upcommingreservation")
     public ResponseEntity<APIResponse> getAllCurrentReservation(){
-        List<CarReservation> upcommingReservation= adminBookingService.findAllUpcommingReservation();
+        List<BookingResponse> upcommingReservation= adminBookingService.findAllUpcommingReservation();
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(upcommingReservation);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);

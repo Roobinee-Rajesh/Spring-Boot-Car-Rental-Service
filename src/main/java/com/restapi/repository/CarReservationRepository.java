@@ -22,6 +22,6 @@ public interface CarReservationRepository extends JpaRepository<CarReservation, 
     @Query("SELECT c FROM CarReservation c WHERE c.appUser.id = :user_id AND c.start_date <= :current_date AND c.end_date >= :current_date")
     List<CarReservation> findAllCurrentReservationsOfUser(@Param("user_id") Integer userId, @Param("current_date") Date currentDate);
     @Query("SELECT c FROM CarReservation c WHERE c.start_date > :current_date")
-    List<CarReservation> findAllUpcommingReservation(@Param("current_date") LocalDateTime currentDate);
+    List<CarReservation> findAllUpcommingReservation(@Param("current_date") Date currentDate);
 
 }

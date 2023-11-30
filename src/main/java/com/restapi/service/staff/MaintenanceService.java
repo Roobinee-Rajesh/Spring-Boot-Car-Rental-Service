@@ -33,12 +33,23 @@ public class MaintenanceService {
         return maintenanceDto.mapToMaintenanceResponse(maintenanceScheduleList);
     }
 
+//    @Transactional
+//    public List<MaintenanceSchedule> updateMaintenanceStaff(MaintenanceRequest maintenanceRequest) {
+//        MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(maintenanceRequest.getId())
+//                .orElseThrow(() -> new InvalidUserException("Maintenance not Found"));
+//        MaintenanceStatus maintenanceStatus = maintenanceStatusRepository.findById(Integer.valueOf(maintenanceRequest.getMaintenanceStatus()))
+//                .orElseThrow(() -> new InvalidUserException("Status not Found"));
+//
+//        maintenanceSchedule.setMaintenanceStatus(maintenanceStatus);
+//        maintenanceScheduleRepository.save(maintenanceSchedule);
+//        return maintenanceScheduleRepository.findAll();
+//    }
+
     @Transactional
     public List<MaintenanceSchedule> updateMaintenanceStaff(MaintenanceRequest maintenanceRequest) {
         MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(maintenanceRequest.getId())
                 .orElseThrow(() -> new InvalidUserException("Maintenance not Found"));
-        MaintenanceStatus maintenanceStatus = maintenanceStatusRepository.findById(Integer.valueOf(maintenanceRequest.getMaintenanceStatus()))
-                .orElseThrow(() -> new InvalidUserException("Status not Found"));
+        MaintenanceStatus maintenanceStatus = maintenanceStatusRepository.findById(2);
 
         maintenanceSchedule.setMaintenanceStatus(maintenanceStatus);
         maintenanceScheduleRepository.save(maintenanceSchedule);
