@@ -4,6 +4,8 @@ import com.restapi.dto.AuthDto;
 import com.restapi.dto.admin.AdminStaffDto;
 import com.restapi.model.AppUser;
 import com.restapi.model.Role;
+import com.restapi.repository.CarDetailRepository;
+import com.restapi.repository.CarReservationRepository;
 import com.restapi.repository.RoleRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.RegisterRequest;
@@ -27,6 +29,11 @@ public class AdminStaffService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private CarReservationRepository carReservationRepository;
+    @Autowired
+    private CarDetailRepository carDetailRepository;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -52,9 +59,11 @@ public class AdminStaffService {
     }
 
     public List<AuthResponse> deleteById(Integer id) {
+//        carDetailRepository.deleteByMaintenanceStaffId(id);
         userRepository.deleteById(id);
         return findAllStaffMembers();
     }
+
 
     @Transactional
     public AppUser updateStaff(AdminStaffRequest adminStaffRequest) {

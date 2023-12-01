@@ -23,4 +23,7 @@ public interface CarDetailRepository extends JpaRepository<CarDetail, Integer> {
             "WHERE (cr.start_date IS NULL OR cr.start_date > :end_date OR cr.end_date < :start_date)",
             nativeQuery = true)
     List<CarDetail> findByAvailablity(@Param("start_date") Date startDate, @Param("end_date") Date endDate);
+
+    @Query("DELETE FROM CarDetail c WHERE c.maintenanceStaff.id=:id")
+    void deleteByMaintenanceStaffId(@Param("id") Integer id);
 }

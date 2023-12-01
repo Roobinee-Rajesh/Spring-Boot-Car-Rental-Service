@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/email")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class EmailController {
 
     @Autowired
